@@ -1,7 +1,8 @@
 pipeline {
-agent any {
-  Stages {
-     Stage ('Checkout') {
+    agent any
+
+     Stages {
+       Stage ('Checkout') {
 	      Steps{
                  sh 'mvn clean install package'		   
  		   }
@@ -20,6 +21,6 @@ agent any {
           echo "Build is faild please check as revert"
              }
            }
-        }
+        
       }
    }
