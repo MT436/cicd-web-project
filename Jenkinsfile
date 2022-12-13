@@ -22,7 +22,7 @@ pipeline {
            }
          }
 
-      sleep 5
+      sleep 5;
         
       stage ("code quality") {
         steps {
