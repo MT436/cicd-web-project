@@ -22,7 +22,8 @@ pipeline {
            }
          }
 
-
+      sleep 5
+        
       stage ("code quality") {
         steps {
            withSonarQubeEnv('sonar') {
