@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-     stages {
+    stages {
        stage ('Build') {
-	      steps{
-                 sh 'mvn clean install package'		   
-     		   }
+              steps{
+                 sh 'mvn clean install package'
+                   }
              post {
       aborted {
             // One or more steps need to be included within each condition's block.
@@ -19,11 +19,10 @@ pipeline {
            // One or more steps need to be included within each condition's block.
           echo "Build is faild please check as revert"
              }
-           }	
+           }
          }
- 
-      sleep 5
-     
+
+
       stage ("code quality") {
         steps {
            withSonarQubeEnv('My SonarQube Server') {
@@ -40,13 +39,10 @@ pipeline {
           echo "success quality check"
               }
       failure {
-           // One or more steps need to be included within each condition's block.
+             // One or more steps need to be included within each condition's block.
           echo "quality is faild please check as revert"
             }
           }
         }
-       
-
-       
-  }
+    }
  }
