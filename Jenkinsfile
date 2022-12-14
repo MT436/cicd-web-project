@@ -25,7 +25,7 @@ pipeline {
 
         stage ("code quality") {
             steps {
-                withSonarQubeEnv('sonarubuntu') {
+                withSonarQubeEnv('sonar1') {
                     sh 'mvn sonar:sonar'
                 }
             }
