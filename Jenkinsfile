@@ -95,11 +95,11 @@ pipeline {
            post {
                 success {
                    // One or more steps need to be included within each condition's block.
-                   mail bcc: '', body: 'smtp email config and testing', cc: '', from: '', replyTo: '', subject: 'checking mail', to: 'thejeshmm@gmail.com'
+                   emailext body: 'email smtp config and checking the extended mail', subject: 'checking smtp email', to: 'thejeshmm@gmail.com'
                 }
                 unsuccessful {
                    // One or more steps need to be included within each condition's block.
-                   mail bcc: '', body: 'smtp email config and testing', cc: '', from: '', replyTo: '', subject: 'checking mail', to: 'thejeshmm@gmail.com'
+                   emailext body: 'email smtp config and checking the extended mail', subject: 'checking smtp email', to: 'thejeshmm@gmail.com'
                 }
            }
  }
