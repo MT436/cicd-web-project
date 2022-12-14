@@ -64,7 +64,7 @@ pipeline {
                 }
             }
         }
-            		stage ("Deploy on Tomcat") {
+            		stage ("Deploy on Docker Tomcat") {
 	        steps {
                   sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd project5;
                   docker build -t tomcat:v1;
