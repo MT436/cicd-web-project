@@ -95,13 +95,11 @@ pipeline {
            post {
                 success {
                    // One or more steps need to be included within each condition's block.
-	               emailext body: 'setting up smpt server for mail', recipientProviders: [contributor()], subject: 'check mail', to: 'thejeshmm@gmail.com'
-
+                   mail bcc: '', body: 'smtp email config and testing', cc: '', from: '', replyTo: '', subject: 'checking mail', to: 'thejeshmm@gmail.com'
                 }
                 unsuccessful {
                    // One or more steps need to be included within each condition's block.
-                   emailext body: 'setting up smpt server for mail', recipientProviders: [contributor()], subject: 'check mail', to: 'thejeshmm@gmail.com'
-
+                   mail bcc: '', body: 'smtp email config and testing', cc: '', from: '', replyTo: '', subject: 'checking mail', to: 'thejeshmm@gmail.com'
                 }
            }
  }
