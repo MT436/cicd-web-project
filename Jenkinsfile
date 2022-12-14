@@ -64,14 +64,14 @@ pipeline {
                 }
             }
         }
-            		stage ("Deploy on Docker Tomcat") {
+            stage ("Deploy on Docker Tomcat") {
 	        steps {
-                  sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd project5;
-                  docker build -t tomcat:v1;
-                  docker stop tomcat:v1;
-                  docker rm tomcat:v1;
-                  docker run -d --name tomcatnew -p 8085:8080 tomcat:v1;
-                  ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'project5', remoteDirectorySDF: false, removePrefix: '**/', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]) 		
+                 sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd project5;
+                 docker build -t tomcat:v1;
+                 docker stop tomcat:v1;
+                 docker rm tomcat:v1;
+                 docker run -d --name tomcatnew -p 8085:8080 tomcat:v1;
+                 ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'project5', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 		    }
 			post {
                 aborted {
@@ -87,7 +87,7 @@ pipeline {
                    echo "Docker is faild please check as revert"
                 }
             }
-	}  
+	}
     }
  }
-
+ 
