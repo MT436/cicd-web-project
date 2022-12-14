@@ -25,7 +25,7 @@ pipeline {
 
         stage ("code quality") {
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonarubuntu') {
                     sh 'mvn sonar:sonar'
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
 		
 	    stage ("Deploy on Tomcat") {
 	        steps {
-                deploy adapters: [tomcat9(credentialsId: 'TOMcat', path: '', url: 'http://172.31.1.204:8082/')], contextPath: 'project5', war: '**/*.war'
+                   deploy adapters: [tomcat9(credentialsId: 'TOMcat', path: '', url: 'http://172.31.1.204:8082/')], contextPath: '/project5', war: '**/*.war'
                 }
 		post {
                 aborted {
