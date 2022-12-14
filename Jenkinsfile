@@ -49,7 +49,7 @@ pipeline {
 	        steps {
                    deploy adapters: [tomcat9(credentialsId: 'TOMcat', path: '', url: 'http://172.31.1.204:8082/')], contextPath: '/project5', war: '**/*.war'
                 }
-		post {
+	    post {
                 aborted {
                    // One or more steps need to be included within each condition's block.
                    echo " Deploy has been aborted"
@@ -63,7 +63,31 @@ pipeline {
                    echo "Deploy is faild please check as revert"
                 }
             }
-	    }
+        }
+            		stage ("Deploy on Tomcat") {
+	        steps {
+                  sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd project5;
+                  docker build -t tomcat:v1;
+                  docker stop tomcat:v1;
+                  docker rm tomcat:v1;
+                  docker run -d --name tomcatnew -p 8085:8080 tomcat:v1;
+                  ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'project5', remoteDirectorySDF: false, removePrefix: '**/', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]) 		
+		    }
+			post {
+                aborted {
+                   // One or more steps need to be included within each condition's block.
+                   echo " Docker has been aborted"
+                }
+                success {
+                   // One or more steps need to be included within each condition's block.
+                   echo "Docker success"
+                }
+                failure {
+                   // One or more steps need to be included within each condition's block.
+                   echo "Docker is faild please check as revert"
+                }
+            }
+	}  
     }
  }
 
