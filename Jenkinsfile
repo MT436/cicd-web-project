@@ -47,8 +47,8 @@ pipeline {
 		
 	    stage ("Deploy on Tomcat") {
 	        steps {
-                   deploy adapters: [tomcat9(credentialsId: 'TOMcat', path: '', url: 'http://172.31.35.76:8082/')], contextPath: 'project4', war: '**/*.war'  		
-		    }
+		deploy adapters: [tomcat9(credentialsId: 'TOMcat', path: '', url: 'http://172.31.35.76:8082/')], contextPath: 'project4', war: '/var/lib/jenkins/workspace/pipeline-decl-1/target/hello-world.war'    
+                }
 		post {
                 aborted {
                    // One or more steps need to be included within each condition's block.
