@@ -24,25 +24,6 @@ pipeline {
                 }
             }
         }
-        stage ('Exec Maven') {
-            steps {
-                rtMavenRun (
-                    tool: MAVEN_TOOL, // Tool name from Jenkins configuration
-                    pom: '*/pom.xml',
-                    goals: 'clean install',
-                    deployerId: "jfrog-instance1",
-                    resolverId: "jfrog-instance1"
-                )
-            }
-        }
-
-        stage ('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: "jfrog-instance1"
-                )
-            }
-        }
 
         stage ("code quality") {
             steps {
